@@ -1,0 +1,33 @@
+*{
+  font-family: Helvetica, Arial, sans-serif;
+
+}
+
+body{
+  padding: 60px;
+  background: #37DF6E;
+}
+
+.task-list{
+  background: #D7EEDF;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 5px;
+}
+
+.todo{
+  align-items: center;
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 3px 10px;
+}
+
+input{
+  color: grey;
+  font-size: 1.2rem;
+  width: 100%;
+}
