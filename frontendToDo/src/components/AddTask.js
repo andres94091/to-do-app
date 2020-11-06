@@ -7,26 +7,26 @@ export const AddTask = ({setTodos, user, setBandReload}) => {
     const [saveTask, setSaveTask] = useState(true)
 
     const isFirstRun = useRef(true);
-
+    
+    async function fetchData() {
+        try {
+            await axios.post(`http://localhost:5000/task/`, {
+                user_id: user,
+                task: inputValue
+            })
+            setInputValue('')
+            setBandReload(band => !band)
+        } catch (e){
+            console.log(e);
+            setBandReload(band => !band)
+        }
+    }
     useEffect(() => {
         if (isFirstRun.current) {
             isFirstRun.current = false;
             return;
         }
         console.log('entre aqui');
-        async function fetchData() {
-            try {
-                await axios.post(`http://localhost:5000/task/`, {
-                    user_id: user,
-                    task: inputValue
-                })
-                setInputValue('')
-                setBandReload(band => !band)
-            } catch (e){
-                console.log(e);
-                setBandReload(band => !band)
-            }
-        }
         fetchData()
     }, [saveTask])
 

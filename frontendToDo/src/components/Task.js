@@ -7,19 +7,19 @@ const Task = ({ todo, index, completeTodos, setBandReload }) => {
     const [task, setTask] = useState(todo)
 
     const isFirstRun = useRef(true);
-
+    
+    async function fetchData() {
+        try {
+            await axios.patch(`http://localhost:5000/task/${task.id}/status/${task.status}`, {})
+            setBandReload(band => !band)
+        } catch (e) {
+            console.log(e);
+        }
+    }
     useEffect(() => {
         if (isFirstRun.current) {
             isFirstRun.current = false;
             return;
-        }
-        async function fetchData() {
-            try {
-                await axios.patch(`http://localhost:5000/task/${task.id}/status/${task.status}`, {})
-                setBandReload(band => !band)
-            } catch (e) {
-                console.log(e);
-            }
         }
         fetchData()
     }, [task])

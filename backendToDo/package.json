@@ -4,7 +4,8 @@
   "description": "to-do test app",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "dev": "nodemon ."
   },
   "repository": {

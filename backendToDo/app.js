@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-var cors = require('cors');
+const cors = require('cors');
 
 // routers
 const taskRouter = require('./api/task/router/')
