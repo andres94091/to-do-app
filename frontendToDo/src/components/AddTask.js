@@ -10,7 +10,7 @@ export const AddTask = ({setTodos, user, setBandReload}) => {
     
     async function fetchData() {
         try {
-            await axios.post(`http://localhost:5000/task/`, {
+            await axios.post(`http://localhost:5000/api/tasks`, {
                 user_id: user,
                 task: inputValue
             })

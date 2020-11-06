@@ -5,16 +5,26 @@ const router = express.Router()
 const taskController = require('../controller/')
 const scheme = require('../scheme')
 
-router.get('/user/:userId', (req, res) => {
+/**
+ * endpoint to get all task for a user
+ */
+router.get('/users/:userId', (req, res) => {
     taskController.getTaskFromUserResponse(res, req.params)
 })
 
-router.post('/', expressJoi(scheme.saveTaskFromUser), (req, res) => {
+/**
+ * endpoint for save a task given a user
+ */
+router.post('/tasks', expressJoi(scheme.saveTaskFromUser), (req, res) => {
     taskController.saveTaskFromUserResponse(res, req.body)
 })
 
-router.patch('/:taskId/status/:status', (req, res) =>{
-    taskController.updateStatusResponse(res, req.params)
+/**
+ * endpoint to update a task
+ */
+router.patch('/tasks/:taskId', (req, res) =>{
+    console.log('entre aqui');
+    taskController.updateStatusResponse(res, {... req.params, ...req.body})
 })
 
 module.exports = router

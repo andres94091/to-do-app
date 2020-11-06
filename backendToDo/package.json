@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "refresh": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "pg": "^8.4.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
   }
 }

@@ -11,7 +11,7 @@ const TaskList = ({ user }) => {
     const [bandReload, setBandReload] = useState(true)
 
     useEffect(async () => {
-        const response = await axios.get(`http://localhost:5000/task/user/${user}`)
+        const response = await axios.get(`http://localhost:5000/api/users/${user}`)
         const { data: taskData } = response.data
         setTodos(taskData)
     }, [userHook, bandReload])

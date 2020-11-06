@@ -4,7 +4,6 @@ exports.up = function (knex) {
     table.increments();
     table.string('name').notNullable();
   })
-
 };
 
 exports.down = function (knex) {

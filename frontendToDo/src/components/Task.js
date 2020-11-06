@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 // import PropTypes from 'prop-types'
 
@@ -6,23 +6,30 @@ const Task = ({ todo, index, completeTodos, setBandReload }) => {
 
     const [task, setTask] = useState(todo)
 
-    const isFirstRun = useRef(true);
-    
-    async function fetchData() {
+
+    async function updateTask() {
         try {
-            await axios.patch(`http://localhost:5000/task/${task.id}/status/${task.status}`, {})
+            await axios.patch(`http://localhost:5000/api/tasks/${task.id}`, {
+                status: !task.status
+            })
             setBandReload(band => !band)
         } catch (e) {
             console.log(e);
         }
     }
-    useEffect(() => {
-        if (isFirstRun.current) {
-            isFirstRun.current = false;
-            return;
-        }
-        fetchData()
-    }, [task])
+
+    function handleClick() {
+        completeTodos(index)
+        setTask(({ id, status, task, user_id }) => {
+            return {
+                id,
+                status: !status,
+                task,
+                user_id
+            }
+        })
+        updateTask()
+    }
 
     return (
         <div
@@ -31,17 +38,7 @@ const Task = ({ todo, index, completeTodos, setBandReload }) => {
         >
             {todo.task}
             <div>
-                <button onClick={() => {
-                    completeTodos(index)
-                    setTask(({id, status, task, user_id}) => {
-                        return {
-                            id,
-                            status: !status,
-                            task,
-                            user_id
-                        }
-                    })
-                }}> Complete</button>
+                <button onClick={() => handleClick()}> status</button>
             </div>
         </div>
     )

@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/task', taskRouter)
+app.use('/api', taskRouter)
 
 // Custom 404 route not found handler
 app.use((req, res) => {
