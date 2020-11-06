@@ -1,12 +1,37 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import axios from 'axios'
 
-export const AddTask = ({setTodos}) => {
+export const AddTask = ({setTodos, user, setBandReload}) => {
 
     const [inputValue, setInputValue] = useState('')
+    const [saveTask, setSaveTask] = useState(true)
+
+    const isFirstRun = useRef(true);
+
+    useEffect(() => {
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
+        console.log('entre aqui');
+        async function fetchData() {
+            try {
+                await axios.post(`http://localhost:5000/task/`, {
+                    user_id: user,
+                    task: inputValue
+                })
+                setInputValue('')
+                setBandReload(band => !band)
+            } catch (e){
+                console.log(e);
+                setBandReload(band => !band)
+            }
+        }
+        fetchData()
+    }, [saveTask])
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value)
-
     }
 
     const handleSubmit = (e) => {
@@ -16,7 +41,7 @@ export const AddTask = ({setTodos}) => {
             const newTask =  [...todos, {task: inputValue, status: false}]
             return newTask.sort((x, y) => (x.status === y.status) ? 0 : x.status ? 1 : -1)
         })
-        setInputValue('')
+        setSaveTask(band => !band)
     }
 
     return (

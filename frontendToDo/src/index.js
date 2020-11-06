@@ -4,7 +4,7 @@ import './index.css';
 import TaskList from './components/TaskList';
 
 ReactDOM.render(
-  <TaskList />,
+  <TaskList user= {1}/>,
   document.getElementById('root')
 );
 

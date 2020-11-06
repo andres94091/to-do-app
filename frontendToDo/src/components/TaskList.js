@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 // import PropTypes from 'prop-types'
 import Task from './Task'
 import AddTask from './AddTask'
 
+const TaskList = ({ user }) => {
 
-const TaskList = () => {
+    const [todos, setTodos] = useState([])
+    const [userHook, setUserHook] = useState(user)
+    const [bandReload, setBandReload] = useState(true)
 
-    const [todos, setTodos] = useState([
-        {task: 'buy eggs', state: false}
-    ])
+    useEffect(async () => {
+        const response = await axios.get(`http://localhost:5000/task/user/${user}`)
+        const { data: taskData } = response.data
+        setTodos(taskData)
+    }, [userHook, bandReload])
 
     const completeTodos = (index) => {
         const newTodos = [...todos]
@@ -23,14 +29,19 @@ const TaskList = () => {
                 {todos.map((todos, index) => {
                     return (
                         <Task
-                            key={index}
-                            index={index}
+                            key={todos.id}
                             todo={todos}
+                            index={index}
                             completeTodos={completeTodos}
+                            setBandReload={setBandReload}
                         />
                     )
                 })}
-                <AddTask setTodos={setTodos} />
+                <AddTask
+                    user={user}
+                    setTodos={setTodos}
+                    setBandReload={setBandReload}
+                />
             </div>
         </>
     )
