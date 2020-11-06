@@ -1,4 +1,4 @@
-const knex = require('../../../services/knex')
+const knex = require('../../../knex/knex')
 
 const getTaskFromUser = async (user_id) => {
     const data = await knex('tasks').where({

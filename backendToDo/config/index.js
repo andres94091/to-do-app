@@ -10,7 +10,7 @@ module.exports = {
     parameters:{
         name: 'tasks App',
         port: process.env.PORT || 5000,
-        env: process.env.env || 'dev',
+        env: process.env.ENVIRONMENT || 'development',
         service: process.env.service || 'toDo-app',
     }
 }

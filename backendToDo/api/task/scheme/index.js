@@ -8,6 +8,5 @@ const saveTaskFromUser = {
 }
 
 module.exports = {
-  getTaskFromUserScheme,
   saveTaskFromUser
 }

@@ -1,4 +1,4 @@
-const knex = require('../services/knex')
+const knex = require('../knex/knex')
 
 describe('test in knex conection', () => {
     test('select users ', async (done) => {
