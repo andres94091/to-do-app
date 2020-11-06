@@ -23,7 +23,6 @@ router.post('/tasks', expressJoi(scheme.saveTaskFromUser), (req, res) => {
  * endpoint to update a task
  */
 router.patch('/tasks/:taskId', (req, res) =>{
-    console.log('entre aqui');
     taskController.updateStatusResponse(res, {... req.params, ...req.body})
 })
 

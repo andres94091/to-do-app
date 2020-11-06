@@ -26,7 +26,6 @@ export const AddTask = ({setTodos, user, setBandReload}) => {
             isFirstRun.current = false;
             return;
         }
-        console.log('entre aqui');
         fetchData()
     }, [saveTask])
 
