@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('tasks', function (table) {
-    table.increments();
+    table.increments('id');
     table.string('task').notNullable();
     table.boolean('status').notNullable().defaultTo(false);
     table
@@ -8,7 +8,9 @@ exports.up = function (knex) {
       .unsigned()
       .index()
       .references('id')
-      .inTable('users');
+      .inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
   });
 };
 
