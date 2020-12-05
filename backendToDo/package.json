@@ -7,6 +7,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "dev": "nodemon .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "start": "node .",
     "refresh": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
   },
@@ -33,7 +35,25 @@
     "pg": "^8.4.2"
   },
   "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-json": "~2.1.2",
+    "eslint-plugin-prettier": "~3.1.4",
+    "husky": "^4.3.4",
+    "lint-staged": "^10.5.3",
     "nodemon": "^2.0.6",
+    "prettier": "~2.1.2",
     "supertest": "^6.0.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "git add ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
