@@ -43,6 +43,6 @@ testem.log
 Thumbs.db
 
 #
-.eslintrc.json
 .env
+.env.json
 /uploads/file
