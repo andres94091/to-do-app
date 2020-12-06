@@ -1,10 +1,13 @@
 const knex = require('../../../knex/knex');
 
-const getTaskFromUser = async (user_id) => {
-  const data = await knex('tasks').where({
-    user_id,
-  });
-  return data;
+const getTaskFromUser = async (userId) => {
+  try {
+    const data = await knex.raw(`select *  from get_task_and_users(${userId})`);
+    return data.rows;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
 const saveTaskFromUser = async (task) => {

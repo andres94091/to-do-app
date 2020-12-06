@@ -15,14 +15,21 @@ router.get('/users/:userId', (req, res) => {
 /**
  * endpoint for save a task given a user
  */
-router.post('/tasks', expressJoi(scheme.saveTaskFromUser), (req, res) => {
-  taskController.saveTaskFromUserResponse(res, req.body);
-});
+router.post(
+  '/users/:userId/tasks',
+  expressJoi(scheme.saveTaskFromUser),
+  (req, res) => {
+    taskController.saveTaskFromUserResponse(res, {
+      ...req.params,
+      ...req.body,
+    });
+  },
+);
 
 /**
  * endpoint to update a task
  */
-router.patch('/tasks/:taskId', (req, res) => {
+router.patch('/users/:userId/tasks/:taskId', (req, res) => {
   taskController.updateStatusResponse(res, { ...req.params, ...req.body });
 });
 
