@@ -13,6 +13,13 @@ router.get('/users/:userId', (req, res) => {
 });
 
 /**
+ * endpoit to get a count of all task per user
+ */
+router.get('/users', (req, res) => {
+  taskController.getCountTaskPerUserResponse(res);
+});
+
+/**
  * endpoint for save a task given a user
  */
 router.post(
