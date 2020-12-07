@@ -1,15 +1,5 @@
 const knex = require('../../../knex/knex');
 
-const getTaskFromUser = async (userId) => {
-  try {
-    const data = await knex.raw(`select *  from get_task_and_users(${userId})`);
-    return data.rows;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-};
-
 const getCountTaskPerUser = async () => {
   try {
     const data = await knex.raw(`select *  from get_count_task_per_user()`);
@@ -20,10 +10,36 @@ const getCountTaskPerUser = async () => {
   }
 };
 
+const getTaskFromUser = async (userId) => {
+  try {
+    const data = await knex.raw(
+      `select *  from get_task_and_users(${userId}, false, false)`,
+    );
+    return data.rows;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+const getTaskFromUserFiltered = async (userId, status) => {
+  try {
+    const data = await knex.raw(
+      `select *  from get_task_and_users(${userId}, ${status}, true)`,
+    );
+    return data.rows;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 const saveTaskFromUser = async (task) => {
   try {
-    const insertStatus = await knex('tasks').insert(task);
-    return insertStatus;
+    const taskId = await knex('tasks').insert(task).returning('*');
+    return {
+      ...taskId[0],
+    };
   } catch (err) {
     console.log(err);
     throw err;
@@ -49,6 +65,7 @@ const updateTask = async (taskId, status) => {
 module.exports = {
   getTaskFromUser,
   getCountTaskPerUser,
+  getTaskFromUserFiltered,
   saveTaskFromUser,
   updateTask,
 };
