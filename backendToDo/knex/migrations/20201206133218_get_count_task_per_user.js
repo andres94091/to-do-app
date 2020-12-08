@@ -8,7 +8,7 @@ exports.up = function (knex) {
 	returns table(
 		id integer,
 		name varchar,
-		task_per_user integer
+		amountTask integer
 	)
 	language plpgsql
 as $$
