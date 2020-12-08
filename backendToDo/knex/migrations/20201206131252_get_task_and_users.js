@@ -1,3 +1,7 @@
+/**
+ * Function Scan on get_task_and_users  (cost=0.25..10.25 rows=1000 width=69)
+ * @param {*} knex
+ */
 exports.up = function (knex) {
   return knex.raw(`
 	create or replace function get_task_and_users(user_filter integer, statusFilter boolean, bandFilter boolean)

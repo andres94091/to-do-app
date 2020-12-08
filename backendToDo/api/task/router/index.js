@@ -5,7 +5,6 @@ const router = express.Router();
 const {
   getCountTaskPerUserResponse,
   getTaskFromUserResponse,
-  getTaskFromUserFilteredResponse,
   saveTaskFromUserResponse,
   updateStatusResponse,
 } = require('../controller/');
@@ -22,11 +21,7 @@ router.get('/users', (req, res) => {
  * endpoint to get all task for a user
  */
 router.get('/users/:userId/tasks', (req, res) => {
-  if (req.query.status) {
-    getTaskFromUserFilteredResponse(res, { ...req.params, ...req.query });
-  } else {
-    getTaskFromUserResponse(res, req.params);
-  }
+  getTaskFromUserResponse(res, { ...req.params, ...req.query });
 });
 
 /**

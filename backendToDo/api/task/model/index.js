@@ -1,8 +1,8 @@
-const knex = require('../../../knex/knex');
+const db = require('../../../knex');
 
 const getCountTaskPerUser = async () => {
   try {
-    const data = await knex.raw(`select *  from get_count_task_per_user()`);
+    const data = await db.raw(`select *  from get_count_task_per_user()`);
     return data.rows;
   } catch (err) {
     console.log(err);
@@ -10,22 +10,10 @@ const getCountTaskPerUser = async () => {
   }
 };
 
-const getTaskFromUser = async (userId) => {
+const getTaskFromUser = async (userId, status, bandFilter) => {
   try {
-    const data = await knex.raw(
-      `select *  from get_task_and_users(${userId}, false, false)`,
-    );
-    return data.rows;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-};
-
-const getTaskFromUserFiltered = async (userId, status) => {
-  try {
-    const data = await knex.raw(
-      `select *  from get_task_and_users(${userId}, ${status}, true)`,
+    const data = await db.raw(
+      `select *  from get_task_and_users(${userId}, ${status}, ${bandFilter})`,
     );
     return data.rows;
   } catch (err) {
@@ -36,9 +24,9 @@ const getTaskFromUserFiltered = async (userId, status) => {
 
 const saveTaskFromUser = async (task) => {
   try {
-    const taskId = await knex('tasks').insert(task).returning('*');
+    const taskSaved = await db.table('tasks').insert(task).returning('*');
     return {
-      ...taskId[0],
+      ...taskSaved[0],
     };
   } catch (err) {
     console.log(err);
@@ -48,14 +36,16 @@ const saveTaskFromUser = async (task) => {
 
 const updateTask = async (taskId, status) => {
   try {
-    const taskReg = await knex('tasks').where('id', taskId);
-    if (!taskReg) {
+    const taskRegistry = await db.table('tasks').where('id', taskId);
+    if (taskRegistry.length === 0) {
       throw 'select id do not exist';
     }
-    const updateReg = await knex('tasks')
+    const updateRegistry = await db
+      .table('tasks')
       .update('status', status)
-      .where('id', taskId);
-    return updateReg;
+      .where('id', taskId)
+      .returning('*');
+    return updateRegistry[0];
   } catch (err) {
     console.log(err);
     throw err;
@@ -65,7 +55,6 @@ const updateTask = async (taskId, status) => {
 module.exports = {
   getTaskFromUser,
   getCountTaskPerUser,
-  getTaskFromUserFiltered,
   saveTaskFromUser,
   updateTask,
 };

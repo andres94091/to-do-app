@@ -1,7 +1,6 @@
 const {
   getTaskFromUser,
   getCountTaskPerUser,
-  getTaskFromUserFiltered,
   saveTaskFromUser,
   updateTask,
 } = require('../model');
@@ -11,15 +10,13 @@ const getCountTaskPerUserService = async () => {
   return taskCount;
 };
 
-const getTaskFromUserService = async (userId) => {
-  const taskData = await getTaskFromUser(Number(userId));
-  return taskData.sort((x, y) =>
-    x.status === y.status ? 0 : x.status ? 1 : -1,
-  );
-};
-
-const getTaskFromUserFilteredService = async ({ userId, status }) => {
-  const taskData = await getTaskFromUserFiltered(Number(userId), status);
+const getTaskFromUserService = async ({ userId, status = null }) => {
+  let bandFilter = true;
+  if (!['true', 'false'].includes(status)) {
+    bandFilter = false;
+    status = false;
+  }
+  const taskData = await getTaskFromUser(Number(userId), status, bandFilter);
   return taskData.sort((x, y) =>
     x.status === y.status ? 0 : x.status ? 1 : -1,
   );
@@ -51,7 +48,6 @@ const updateStatusTaskService = async ({ taskId, status }) => {
 module.exports = {
   getTaskFromUserService,
   getCountTaskPerUserService,
-  getTaskFromUserFilteredService,
   saveTaskFromUserService,
   updateStatusTaskService,
 };

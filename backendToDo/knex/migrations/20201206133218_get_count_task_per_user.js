@@ -1,7 +1,12 @@
+/**
+ * Function Scan on get_count_task_per_user  (cost=0.25..10.25 rows=1000 width=40)
+ * @param {*} knex
+ */
 exports.up = function (knex) {
   return knex.raw(`
-  create or replace function get_count_task_per_user()
+	create or replace function get_count_task_per_user()
 	returns table(
+		id integer,
 		name varchar,
 		task_per_user integer
 	)
@@ -9,7 +14,7 @@ exports.up = function (knex) {
 as $$
 begin
 	return query
-		select u.name, count(t.*)::integer from users u
+		select u.id, u.name, count(t.*)::integer from users u
 		left join tasks t on u.id = t.user_id
 		group by u.id
 		order by u.id;
