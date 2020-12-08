@@ -19,7 +19,6 @@ const TaskList = ({ user }) => {
             const response = await axios.get(`http://localhost:5000/api/users/${userHook}/tasks?status=${filterStatus}`)
             const { data: taskData } = response.data
             setTodos(taskData)
-
         }
         getTask()
     }, [userHook, bandReload, filterStatus])

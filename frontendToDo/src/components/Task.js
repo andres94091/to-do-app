@@ -6,14 +6,10 @@ const Task = ({ todo, user, setBandReload }) => {
 
     const [task, setTask] = useState(todo)
 
-    useEffect(() => {
-        updateTask()
-    }, [task])
-
     async function updateTask() {
         try {
             await axios.patch(`http://localhost:5000/api/users/${user}/tasks/${task.id}`, {
-                status: task.status
+                status: !task.status
             })
             setBandReload(band => !band)
         } catch (e) {
@@ -22,6 +18,7 @@ const Task = ({ todo, user, setBandReload }) => {
     }
 
     function handleChange() {
+        updateTask()
         setTask({
             ...task,
             status: !task.status,
