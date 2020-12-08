@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const SearchUser = ({setUserHook}) => {
+const SearchUser = ({setUserHook}) => {
 
   const [arrayUsersTasks, setArrayUsersTasks] = useState([])
 
@@ -31,3 +31,5 @@ export const SearchUser = ({setUserHook}) => {
     </>
   )
 }
+
+export default SearchUser

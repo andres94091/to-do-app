@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test in <SearchUser/> should render the component correctly 1`] = `
+<Fragment>
+  <select
+    className="custom-select custom-select-lg"
+    list="usersList"
+    onChange={[Function]}
+  />
+</Fragment>
+`;

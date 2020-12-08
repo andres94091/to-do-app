@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests in <UsersTaskCountGrid/> should render the component correctly 1`] = `
+<Fragment>
+  <table
+    className="users-task-table table table-striped"
+  >
+    <thead>
+      <tr
+        className="users-task-table-header"
+      >
+        <th
+          key="0"
+        >
+          Id
+        </th>
+        <th
+          key="1"
+        >
+          Name
+        </th>
+        <th
+          key="2"
+        >
+          Task per user
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</Fragment>
+`;

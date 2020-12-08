@@ -1,14 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useState} from 'react'
 import axios from 'axios'
 
 export const AddTask = ({setTodos, user, setBandReload}) => {
 
     const [inputValue, setInputValue] = useState('')
-    const [saveTask, setSaveTask] = useState(true)
 
-    const isFirstRun = useRef(true);
-    
-    async function fetchData() {
+    async function saveData() {
         try {
             await axios.post(`http://localhost:5000/api/users/${user}/tasks`, {
                 task: inputValue
@@ -20,13 +17,6 @@ export const AddTask = ({setTodos, user, setBandReload}) => {
             setBandReload(band => !band)
         }
     }
-    useEffect(() => {
-        if (isFirstRun.current) {
-            isFirstRun.current = false;
-            return;
-        }
-        fetchData()
-    }, [saveTask])
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value)
@@ -39,7 +29,7 @@ export const AddTask = ({setTodos, user, setBandReload}) => {
             const newTask =  [...todos, {task: inputValue, status: false}]
             return newTask.sort((x, y) => (x.status === y.status) ? 0 : x.status ? 1 : -1)
         })
-        setSaveTask(band => !band)
+        saveData()
     }
 
     return (

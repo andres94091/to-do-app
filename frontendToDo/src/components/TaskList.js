@@ -3,9 +3,9 @@ import axios from 'axios'
 // import PropTypes from 'prop-types'
 import Task from './Task'
 import AddTask from './AddTask'
-import { TaskFilter } from './TaskFilter'
-import { UsersTaskCountGrid } from './UsersTaskCountGrid'
-import { SearchUser } from './SearchUser'
+import TaskFilter from './TaskFilter'
+import UsersTaskCountGrid from './UsersTaskCountGrid'
+import SearchUser from './SearchUser'
 
 const TaskList = ({ user }) => {
 

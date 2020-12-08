@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const UsersTaskCountGrid = ({bandReload}) => {
+const UsersTaskCountGrid = ({bandReload}) => {
 
   const [arrayUsersTasks, setArrayUsersTasks] = useState([])
 
@@ -43,3 +43,5 @@ export const UsersTaskCountGrid = ({bandReload}) => {
     </>
   )
 }
+
+export default UsersTaskCountGrid

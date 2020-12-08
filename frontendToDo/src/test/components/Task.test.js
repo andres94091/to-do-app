@@ -3,9 +3,9 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Task from '../components/task';
+import Task from '../../components/task';
 
-describe('tests in component Task', () => {
+describe('tests in <Task/>', () => {
 
     const todo = { id: 1, task: 'test task', status: false, user_id: 1 }
     const wrapper = shallow(<Task
@@ -16,7 +16,7 @@ describe('tests in component Task', () => {
 
     />)
 
-    test('should render the component correctly', () => {
+    it('should render the component correctly', () => {
 
         expect(wrapper).toMatchSnapshot();
 

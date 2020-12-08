@@ -1,7 +1,7 @@
 import React from 'react'
 import '../index.css';
 
-export const TaskFilter = ({setFilterStatus}) => {
+const TaskFilter = ({setFilterStatus}) => {
 
   const handleFilterInput = (event) => {
     setFilterStatus(event.target.value)
@@ -27,3 +27,5 @@ export const TaskFilter = ({setFilterStatus}) => {
     </>
   )
 }
+
+export default TaskFilter

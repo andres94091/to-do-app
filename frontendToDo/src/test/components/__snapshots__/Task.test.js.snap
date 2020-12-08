@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests in <Task/> should render the component correctly 1`] = `
+<Fragment>
+  <div>
+    <input
+      checked={false}
+      className="form-check-input"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    test task
+  </div>
+</Fragment>
+`;
