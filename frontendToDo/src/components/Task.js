@@ -2,15 +2,14 @@ import React, { useState } from 'react'
 import axios from 'axios'
 // import PropTypes from 'prop-types'
 
-const Task = ({ todo, index, completeTodos, setBandReload }) => {
+const Task = ({ todo, user, index, completeTodos, setBandReload }) => {
 
     const [task, setTask] = useState(todo)
 
-
     async function updateTask() {
         try {
-            await axios.patch(`http://localhost:5000/api/tasks/${task.id}`, {
-                status: !task.status
+            await axios.patch(`http://localhost:5000/api/users/${user}/tasks/${task.id}`, {
+                status: task.status
             })
             setBandReload(band => !band)
         } catch (e) {
@@ -18,7 +17,9 @@ const Task = ({ todo, index, completeTodos, setBandReload }) => {
         }
     }
 
-    function handleClick() {
+    function handleChange() {
+        console.log('status', task);
+        console.log('status', task);
         completeTodos(index)
         setTask(({ id, status, task, user_id }) => {
             return {
@@ -32,15 +33,16 @@ const Task = ({ todo, index, completeTodos, setBandReload }) => {
     }
 
     return (
-        <div
-            className='todo'
-            style={{ textDecoration: todo.status ? "line-through" : "" }}
-        >
-            {todo.task}
+        <>
             <div>
-                <button onClick={() => handleClick()}> status</button>
+                <input 
+                type= 'checkbox'
+                className="form-check-input"
+                checked = {todo.status}
+                onChange = {handleChange}
+                />{todo.task}
             </div>
-        </div>
+        </>
     )
 }
 

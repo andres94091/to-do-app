@@ -5,7 +5,19 @@
 
 body{
   padding: 60px;
-  background: #37DF6E;
+  background: #edf7f1;
+}
+
+.users-task-table{
+  background-color: #D7EEDF;
+}
+
+.users-task-table-header{
+  background-color: #b9dfc9;
+}
+
+.filter-todos{
+  display: inline;
 }
 
 .task-list{
