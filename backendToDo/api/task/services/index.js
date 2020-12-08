@@ -1,5 +1,6 @@
 const {
   getTaskFromUser,
+  getUser,
   getCountTaskPerUser,
   saveTaskFromUser,
   updateTask,
@@ -8,6 +9,16 @@ const {
 const getCountTaskPerUserService = async () => {
   const taskCount = await getCountTaskPerUser();
   return taskCount;
+};
+
+const getUserService = async ({ userId }) => {
+  try {
+    const user = await getUser(userId);
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
 const getTaskFromUserService = async ({ userId, status = null }) => {
@@ -47,6 +58,7 @@ const updateStatusTaskService = async ({ taskId, status }) => {
 
 module.exports = {
   getTaskFromUserService,
+  getUserService,
   getCountTaskPerUserService,
   saveTaskFromUserService,
   updateStatusTaskService,

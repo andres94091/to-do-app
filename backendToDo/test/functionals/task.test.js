@@ -7,6 +7,7 @@ const {
   taskId,
   getUsersAndCountTaskQuery,
   getUsersAndCountTask,
+  getUser,
   getTaskFromUser,
   getTaskFromUserQuery,
   getTaskFromUserQueryFilter,
@@ -55,6 +56,21 @@ describe('test in task api', () => {
           expect(res.body.data.length).toEqual(3);
           expect(db.raw).toHaveBeenCalled();
           expect(db.raw).toBeCalledWith(getUsersAndCountTaskQuery);
+          done();
+        });
+      });
+    });
+
+    describe('/api/users/:userId', () => {
+      describe('GET', () => {
+        it('should get the user with id 1', async (done) => {
+          db.table().where.mockReturnValueOnce(Promise.resolve(getUser));
+
+          const res = await request.get(`/api/users/${userId}`);
+
+          expect(res.status).toBe(200);
+          expect(res.body.data).toEqual(getUser[0]);
+          expect(db.table().where).toHaveBeenCalled();
           done();
         });
       });

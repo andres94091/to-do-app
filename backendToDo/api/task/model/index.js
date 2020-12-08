@@ -10,6 +10,16 @@ const getCountTaskPerUser = async () => {
   }
 };
 
+const getUser = async (userId) => {
+  try {
+    const data = await db.table('users').where('id', userId);
+    return data[0];
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 const getTaskFromUser = async (userId, status, bandFilter) => {
   try {
     const data = await db.raw(
@@ -54,6 +64,7 @@ const updateTask = async (taskId, status) => {
 
 module.exports = {
   getTaskFromUser,
+  getUser,
   getCountTaskPerUser,
   saveTaskFromUser,
   updateTask,

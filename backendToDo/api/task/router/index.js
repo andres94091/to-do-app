@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   getCountTaskPerUserResponse,
+  getUserResponse,
   getTaskFromUserResponse,
   saveTaskFromUserResponse,
   updateStatusResponse,
@@ -15,6 +16,13 @@ const scheme = require('../scheme');
  */
 router.get('/users', (req, res) => {
   getCountTaskPerUserResponse(res);
+});
+
+/**
+ * endpint to get an user
+ */
+router.get('/users/:userId', (req, res) => {
+  getUserResponse(res, req.params);
 });
 
 /**

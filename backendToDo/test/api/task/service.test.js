@@ -1,6 +1,7 @@
 const {
   getTaskFromUser,
   getCountTaskPerUser,
+  getUser,
   saveTaskFromUser,
   updateTask,
 } = require('../../../api/task/model');
@@ -8,6 +9,7 @@ const {
 const {
   getTaskFromUserService,
   getCountTaskPerUserService,
+  getUserService,
   saveTaskFromUserService,
   updateStatusTaskService,
 } = require('../../../api/task/services');
@@ -16,6 +18,7 @@ const {
   userId,
   getUsersCountModelResponse,
   getUserTaskModelResponse,
+  getUserModelResponse,
   newTask,
   taskSaved,
   updateTaskInput,
@@ -24,6 +27,7 @@ const {
 
 jest.mock('../../../api/task/model', () => ({
   getTaskFromUser: jest.fn(),
+  getUser: jest.fn(),
   getCountTaskPerUser: jest.fn(),
   saveTaskFromUser: jest.fn(),
   updateTask: jest.fn(),
@@ -45,6 +49,17 @@ describe('ToDo app service', () => {
       expect(getCountTaskPerUser).toHaveBeenCalled();
       expect(usersTaskCount.length).toBe(3);
       done();
+    });
+  });
+
+  describe('get an user', () => {
+    it('should get the user with id 1', () => {
+      getUser.mockReturnValueOnce(Promise.resolve(getUserModelResponse));
+
+      getUserService({ userId });
+
+      expect(getUser).toHaveBeenCalled();
+      expect(getUser).toBeCalledWith(userId);
     });
   });
 

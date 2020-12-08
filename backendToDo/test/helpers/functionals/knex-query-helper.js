@@ -28,6 +28,13 @@ const getUsersAndCountTask = {
   ],
 };
 
+const getUser = [
+  {
+    id: 1,
+    name: 'Andres Castro',
+  },
+];
+
 const getTaskFromUserQuery =
   'select *  from get_task_and_users(1, false, false)';
 
@@ -79,6 +86,7 @@ module.exports = {
   taskId,
   getUsersAndCountTaskQuery,
   getUsersAndCountTask,
+  getUser,
   getTaskFromUserQuery,
   getTaskFromUserQueryFilter,
   getTaskFromUser,

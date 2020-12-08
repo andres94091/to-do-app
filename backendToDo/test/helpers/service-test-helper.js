@@ -18,6 +18,11 @@ const getUsersCountModelResponse = [
   },
 ];
 
+const getUserModelResponse = {
+  id: 1,
+  name: 'Andres Castro',
+};
+
 const getUserTaskModelResponse = [
   {
     id: 1,
@@ -63,6 +68,7 @@ module.exports = {
   userId,
   getUsersCountModelResponse,
   getUserTaskModelResponse,
+  getUserModelResponse,
   newTask,
   taskSaved,
   updateTaskInput,

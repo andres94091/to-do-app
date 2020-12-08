@@ -1,5 +1,6 @@
 const {
   getTaskFromUserService,
+  getUserService,
   getCountTaskPerUserService,
   saveTaskFromUserService,
   updateStatusTaskService,
@@ -9,6 +10,15 @@ const utils = require('../../../config/utils');
 const getCountTaskPerUserResponse = async (res) => {
   const taskCount = await getCountTaskPerUserService();
   utils.buildResponse(res, 200, taskCount, 'count of task per user');
+};
+
+const getUserResponse = async (res, data) => {
+  try {
+    const user = await getUserService(data);
+    utils.buildResponse(res, 200, user, 'user get');
+  } catch (err) {
+    utils.buildResponse(res, 500, err, 'error in user get');
+  }
 };
 
 const getTaskFromUserResponse = async (res, data) => {
@@ -36,6 +46,7 @@ const updateStatusResponse = async (res, data) => {
 
 module.exports = {
   getTaskFromUserResponse,
+  getUserResponse,
   getCountTaskPerUserResponse,
   saveTaskFromUserResponse,
   updateStatusResponse,
