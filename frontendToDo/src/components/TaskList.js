@@ -14,18 +14,15 @@ const TaskList = ({ user }) => {
     const [bandReload, setBandReload] = useState(true)
     const [filterStatus, setFilterStatus] = useState(null)
 
-    useEffect(async () => {
-        const response = await axios.get(`http://localhost:5000/api/users/${userHook}/tasks?status=${filterStatus}`)
-        const { data: taskData } = response.data
-        setTodos(taskData)
-    }, [userHook, bandReload, filterStatus])
+    useEffect(() => {
+        async function getTask(){
+            const response = await axios.get(`http://localhost:5000/api/users/${userHook}/tasks?status=${filterStatus}`)
+            const { data: taskData } = response.data
+            setTodos(taskData)
 
-    const completeTodos = (index) => {
-        const newTodos = [...todos]
-        newTodos[index].status = !newTodos[index].status
-        newTodos.sort((x, y) => (x.status === y.status) ? 0 : x.status ? 1 : -1)
-        setTodos(newTodos)
-    }
+        }
+        getTask()
+    }, [userHook, bandReload, filterStatus])
 
     return (
         <>
@@ -44,8 +41,6 @@ const TaskList = ({ user }) => {
                             key={todos.id}
                             todo={todos}
                             user={userHook}
-                            index={index}
-                            completeTodos={completeTodos}
                             setBandReload={setBandReload}
                         />
                     )

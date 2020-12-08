@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 // import PropTypes from 'prop-types'
 
-const Task = ({ todo, user, index, completeTodos, setBandReload }) => {
+const Task = ({ todo, user, setBandReload }) => {
 
     const [task, setTask] = useState(todo)
+
+    useEffect(() => {
+        updateTask()
+    }, [task])
 
     async function updateTask() {
         try {
@@ -18,29 +22,21 @@ const Task = ({ todo, user, index, completeTodos, setBandReload }) => {
     }
 
     function handleChange() {
-        console.log('status', task);
-        console.log('status', task);
-        completeTodos(index)
-        setTask(({ id, status, task, user_id }) => {
-            return {
-                id,
-                status: !status,
-                task,
-                user_id
-            }
+        setTask({
+            ...task,
+            status: !task.status,
         })
-        updateTask()
     }
 
     return (
         <>
             <div>
-                <input 
-                type= 'checkbox'
-                className="form-check-input"
-                checked = {todo.status}
-                onChange = {handleChange}
-                />{todo.task}
+                <input
+                    type='checkbox'
+                    className="form-check-input"
+                    checked={task.status}
+                    onChange={handleChange}
+                />{task.task}
             </div>
         </>
     )
