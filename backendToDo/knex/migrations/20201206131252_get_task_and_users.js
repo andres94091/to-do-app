@@ -1,5 +1,5 @@
 /**
- * Function Scan on get_task_and_users  (cost=0.25..10.25 rows=1000 width=69)
+ * Function Scan on get_task_and_users  (cost=0.25..10.25 rows=1000 width=69) (actual time=0.901..0.901 rows=1 loops=1)
  * @param {*} knex
  */
 exports.up = function (knex) {
